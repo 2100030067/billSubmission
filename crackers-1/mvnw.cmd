@@ -53,7 +53,8 @@ if ($env:MVNW_VERBOSE -eq "true") {
 # calculate distributionUrl, requires .mvn/wrapper/maven-wrapper.properties
 $distributionUrl = (Get-Content -Raw "$scriptDir/.mvn/wrapper/maven-wrapper.properties" | ConvertFrom-StringData).distributionUrl
 if (!$distributionUrl) {
-  Write-Error "cannot read distributionUrl property in $scriptDir/.mvn/wrapper/maven-wrapper.properties"
+  # Example: Set your own Maven URL here
+  $distributionUrl = "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.6/apache-maven-3.8.6-bin.zip"
 }
 
 switch -wildcard -casesensitive ( $($distributionUrl -replace '^.*/','') ) {
