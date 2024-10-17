@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Submission Form</title>
+    <script>
+        // Function to set current date and time in the input fields
+        function setCurrentDateTime() {
+            const now = new Date();
+            const dateInput = document.getElementById("billDate");
+            const timeInput = document.getElementById("billTime");
+
+            // Format the date to YYYY-MM-DD
+            const formattedDate = now.toISOString().split('T')[0];
+            dateInput.value = formattedDate;
+
+            // Format the time to HH:MM
+            const formattedTime = now.toTimeString().split(' ')[0].substring(0, 5);
+            timeInput.value = formattedTime;
+        }
+
+        function showDialog(message) {
+            alert(message); // Simple alert dialog for demonstration
+        }
+
+        // Execute when the document is ready
+        window.onload = function() {
+            // Set the current date and time
+            setCurrentDateTime();
+
+            // Show success message if it exists
+            const successMessage = document.getElementById('successMessage').value;
+            if (successMessage) {
+                showDialog(successMessage);
+            }
+        }
+    </script>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333;">
+
+<div style="max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center; margin-bottom: 20px; color: #5a5a5a;">Bill Submission Form</h2>
+
+    <form action="/submitcrackers" method="post">
+        <div style="margin-bottom: 15px;">
+            <label for="billamount" style="display: block; margin-bottom: 5px; font-weight: bold;">Bill Amount:</label>
+            <input type="number" id="billamount" name="billamount" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="billType" style="display: block; margin-bottom: 5px; font-weight: bold;">Bill Type:</label>
+            <select id="billType" name="billType" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                <option value="" disabled selected>Select Bill Type</option>
+                <option value="Offline">Offline</option>
+                <option value="PhonePay">PhonePay</option>
+                <!-- Add more bill types if needed -->
+            </select>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="billDate" style="display: block; margin-bottom: 5px; font-weight: bold;">Bill Date:</label>
+            <input type="date" id="billDate" name="billDate" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="billTime" style="display: block; margin-bottom: 5px; font-weight: bold;">Bill Time:</label>
+            <input type="time" id="billTime" name="billTime" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <input type="submit" value="Submit Bill" style="width: 100%; padding: 10px; background-color: #007bff; border: none; border-radius: 4px; color: white; font-size: 16px; cursor: pointer; transition: background-color 0.3s;">
+        </div>
+    </form>
+
+    <input type="hidden" id="successMessage" value="${successMessage}">
+
+    <!-- View My Bills Button -->
+    <div style="margin-top: 15px;">
+        <a href="/crackers" style="display: inline-block; width: 100%; padding: 10px; background-color: #28a745; border: none; border-radius: 4px; color: white; font-size: 16px; text-align: center; text-decoration: none; transition: background-color 0.3s;">
+            View My Bills
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
